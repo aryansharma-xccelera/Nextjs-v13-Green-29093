@@ -1,7 +1,19 @@
 // MOCK DATA — placeholder records for local development only.
 // Replace with real API data before production use.
 
-import { Category, Transaction } from "@/types";
+import { Category, Transaction, User } from "@/types";
+
+// MOCK: seed account for the login/sign-up demo flow. Password is plaintext
+// for local-only mock persistence — never do this against a real backend.
+export const mockUsers: Array<User & { password: string }> = [
+  {
+    id: "user-1",
+    name: "Demo User",
+    email: "demo@example.com",
+    password: "password123",
+    createdAt: new Date(2024, 0, 1).toISOString(),
+  },
+];
 
 export const PREDEFINED_CATEGORY_NAMES = [
   "Food",

@@ -10,6 +10,7 @@ Then open http://localhost:46615
 | Route | Page file | Description |
 |-------|-----------|-------------|
 | / | app/page.tsx | Redirects to /dashboard |
+| /login | app/login/page.tsx | Sign in / sign up (toggle) with mock accounts, forgot-password mock flow |
 | /dashboard | app/(shell)/dashboard/page.tsx | Financial overview: totals, category breakdown, recent transactions |
 | /transactions | app/(shell)/transactions/page.tsx | Full transaction list with search, filter, sort, edit, delete |
 | /transactions/add | app/(shell)/transactions/add/page.tsx | Form to create a new transaction |
@@ -19,6 +20,9 @@ Then open http://localhost:46615
 | (any unmatched URL) | app/not-found.tsx | 404 page with a Go Home link |
 
 ## Navigation map
+- /login -> /dashboard (successful sign in / sign up)
+- Any (shell) route -> /login (no active mock session; AuthGuard redirects)
+- (shell) TopBar "Log out" button -> /login
 - Sidebar (Dashboard, Transactions, Categories, Monthly Summary) -> respective page (all screens)
 - Mobile bottom nav -> same four routes on small screens
 - TopBar "Add Transaction" button -> /transactions/add (all screens)
@@ -59,7 +63,8 @@ Then open http://localhost:46615
 - text-primary: #111827
 
 ## Notes
-- All data (transactions and categories) is persisted to localStorage via lib/stores/, seeded once from lib/mock-data.ts.
+- All data (transactions, categories, users, and the current session) is persisted to localStorage via lib/stores/, seeded once from lib/mock-data.ts.
+- Auth is a mock, localStorage-backed flow (lib/stores/auth-store.ts). Demo login: demo@example.com / password123. The (shell) route group is gated by components/AuthGuard.tsx, which redirects to /login when there is no active session.
 - Predefined categories (Food, Travel, Shopping, Bills, Health, Entertainment, Other) cannot be deleted.
 - Custom categories can only be deleted when no transaction references them.
 - The Vitest smoke test suite (npm run test) passes for all seven testable page components.

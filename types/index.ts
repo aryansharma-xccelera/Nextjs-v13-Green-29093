@@ -48,6 +48,24 @@ export interface MonthlySummary {
   categoryBreakdown: CategoryBreakdownItem[];
 }
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+}
+
+export interface SignUpInput {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LoginInput {
+  email: string;
+  password: string;
+}
+
 export type SortField = "date" | "amount" | "category";
 export type SortDirection = "asc" | "desc";
 

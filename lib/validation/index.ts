@@ -30,6 +30,37 @@ export function validateDate(value: string): string {
   return "";
 }
 
+export function validateEmail(value: string): string {
+  if (!value || !value.trim()) {
+    return "Email is required";
+  }
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(value.trim())) {
+    return "Enter a valid email address";
+  }
+  return "";
+}
+
+export function validatePassword(value: string): string {
+  if (!value) {
+    return "Password is required";
+  }
+  if (value.length < 6) {
+    return "Password must be at least 6 characters";
+  }
+  return "";
+}
+
+export function validateConfirmPassword(password: string, confirmPassword: string): string {
+  if (!confirmPassword) {
+    return "Please confirm your password";
+  }
+  if (password !== confirmPassword) {
+    return "Passwords do not match";
+  }
+  return "";
+}
+
 export function validateCategoryName(value: string, existingNames: string[]): string {
   if (!value || !value.trim()) {
     return "Category name is required";
